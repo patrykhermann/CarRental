@@ -148,7 +148,7 @@ namespace CarRental.API.Services
 
         public IEnumerable<Rental> GetRentals()
         {
-            throw new NotImplementedException();
+            return _context.Rentals.ToList();
         }
 
         public bool RentalExists(Guid rentalId)

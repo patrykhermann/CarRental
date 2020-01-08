@@ -1,3 +1,4 @@
+using AutoMapper;
 using CarRental.API.DbContexts;
 using CarRental.API.Services;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace CarRental.API
 {
@@ -22,6 +24,8 @@ namespace CarRental.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICarRentalRepository, CarRentalRepository>();
 
