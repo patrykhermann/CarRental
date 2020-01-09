@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CarRental.API.Models;
+using CarRental.API.ResourceParameters;
 using CarRental.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,9 +22,10 @@ namespace CarRental.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ClientDto>> GetClients()
+        [HttpHead]
+        public ActionResult<IEnumerable<ClientDto>> GetClients([FromQuery] ClientsResourceParameters clientsResourceParameters)
         {
-            var clientsFromRepo = _carRentalRepository.GetClients();
+            var clientsFromRepo = _carRentalRepository.GetClients(clientsResourceParameters);
             return Ok(_mapper.Map<IEnumerable<ClientDto>>(clientsFromRepo));
         }
 

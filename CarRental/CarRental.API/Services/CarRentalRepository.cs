@@ -1,5 +1,6 @@
 ﻿using CarRental.API.DbContexts;
 using CarRental.API.Entities;
+using CarRental.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,9 +117,31 @@ namespace CarRental.API.Services
             return _context.Cars.FirstOrDefault(c => c.Id == carId);
         }
 
-        public IEnumerable<Car> GetCars()
+        public IEnumerable<Car> GetCars(CarsResourceParameters carsResourceParameters)
         {
-            return _context.Cars.ToList();
+            var collection = _context.Cars as IQueryable<Car>;
+
+            // Filtering
+            if(!string.IsNullOrWhiteSpace(carsResourceParameters.Brand))
+            {
+                var brand = carsResourceParameters.Brand.Trim();
+                collection = collection.Where(c => c.Brand == brand);
+            }
+
+            if(!string.IsNullOrWhiteSpace(carsResourceParameters.PricePerDay))
+            {
+                var pricePerDay = decimal.Parse(carsResourceParameters.PricePerDay.Trim());
+                collection = collection.Where(c => c.PricePerDay == pricePerDay);
+            }
+
+            //Searching
+            if(!string.IsNullOrWhiteSpace(carsResourceParameters.SearchQuery))
+            {
+                var searchQuery = carsResourceParameters.SearchQuery.Trim();
+                collection = collection.Where(c => c.Brand.Contains(searchQuery) || c.Model.Contains(searchQuery));
+            }
+
+            return collection.ToList();
         }
 
         public Client GetClient(Guid clientId)
@@ -131,9 +154,17 @@ namespace CarRental.API.Services
             return _context.Clients.FirstOrDefault(c => c.Id == clientId);
         }
 
-        public IEnumerable<Client> GetClients()
+        public IEnumerable<Client> GetClients(ClientsResourceParameters clientsResourceParameters)
         {
-            return _context.Clients.ToList();
+            var collection = _context.Clients as IQueryable<Client>;
+
+            if(!string.IsNullOrWhiteSpace(clientsResourceParameters.SearchQuery))
+            {
+                var searchQuery = clientsResourceParameters.SearchQuery.Trim();
+                collection = collection.Where(c => c.FirstName.Contains(searchQuery) || c.LastName.Contains(searchQuery));
+            }
+
+            return collection.ToList();
         }
 
         public Rental GetRental(Guid rentalId)

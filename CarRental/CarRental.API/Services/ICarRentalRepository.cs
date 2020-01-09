@@ -1,4 +1,5 @@
 ﻿using CarRental.API.Entities;
+using CarRental.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 
@@ -7,12 +8,12 @@ namespace CarRental.API.Services
     public interface ICarRentalRepository
     {
         Client GetClient(Guid clientId);
-        IEnumerable<Client> GetClients();
+        IEnumerable<Client> GetClients(ClientsResourceParameters clientsResourceParameters);
         void AddClient(Client client);
         void UpdateClient(Client client);
         void DeleteClient(Client client);
         bool ClientExists(Guid clientId);
-        IEnumerable<Car> GetCars();
+        IEnumerable<Car> GetCars(CarsResourceParameters carsResourceParameters);
         Car GetCar(Guid carId);
         void AddCar(Car car);
         void UpdateCar(Car car);

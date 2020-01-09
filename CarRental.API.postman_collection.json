@@ -128,6 +128,230 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET Searched Cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars?searchQuery=fabia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "searchQuery",
+							"value": "fabia"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Filtered Cars (by Brand)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars?brand=skoda",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "skoda"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Filtered Cars (by PricePerDay)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars?pricePerDay=109",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "pricePerDay",
+							"value": "109"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Filtered Cars (by Brand and Price)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars?pricePerDay=109&brand=seat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "pricePerDay",
+							"value": "109"
+						},
+						{
+							"key": "brand",
+							"value": "seat"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Filtered and Searched Cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars?pricePerDay=109&searchQuery=astra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "pricePerDay",
+							"value": "109"
+						},
+						{
+							"key": "searchQuery",
+							"value": "astra"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Searched Clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/clients?searchQuery=kowalski",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients"
+					],
+					"query": [
+						{
+							"key": "searchQuery",
+							"value": "kowalski"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEAD Clients",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEAD Cars",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEAD Rentals",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/rentals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"rentals"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

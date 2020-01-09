@@ -1,4 +1,5 @@
 ﻿using CarRental.API.Entities;
+using CarRental.API.ResourceParameters;
 using CarRental.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,9 +19,10 @@ namespace CarRental.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Car>> GetCars()
+        [HttpHead]
+        public ActionResult<IEnumerable<Car>> GetCars([FromQuery]CarsResourceParameters carsResourceParameters)
         {
-            var carsFromRepo = _carRentalRepository.GetCars();
+            var carsFromRepo = _carRentalRepository.GetCars(carsResourceParameters);
             return Ok(carsFromRepo);
         }
 

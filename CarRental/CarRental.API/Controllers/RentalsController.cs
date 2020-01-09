@@ -21,6 +21,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public ActionResult<IEnumerable<RentalDto>> GetRentals()
         {
             var rentalsFromRepo = _carRentalRepository.GetRentals();
