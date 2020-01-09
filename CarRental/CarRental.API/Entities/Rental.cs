@@ -26,6 +26,7 @@ namespace CarRental.API.Entities
         [Required]
         public decimal FullPrice { get; set; }
 
+        [Range(0, 100)]
         public int Discount { get; set; } = 0;
 
         [ForeignKey("CarId")]

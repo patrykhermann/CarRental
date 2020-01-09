@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarRental.API.Entities;
 using CarRental.API.Models;
 using CarRental.API.ResourceParameters;
 using CarRental.API.Services;
@@ -29,7 +30,7 @@ namespace CarRental.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ClientDto>>(clientsFromRepo));
         }
 
-        [HttpGet("{clientId}")]
+        [HttpGet("{clientId}", Name = "GetClient")]
         public ActionResult<ClientDto> GetClient(Guid clientId)
         {
             var clientFromRepo = _carRentalRepository.GetClient(clientId);
@@ -40,6 +41,18 @@ namespace CarRental.API.Controllers
             }
 
             return Ok(_mapper.Map<ClientDto>(clientFromRepo));
+        }
+
+        [HttpPost]
+        public ActionResult<ClientDto> CreateClient(ClientForCreationDto client)
+        {
+            var clientEntity = _mapper.Map<Client>(client);
+            _carRentalRepository.AddClient(clientEntity);
+            _carRentalRepository.Save();
+
+            var clientToReturn = _mapper.Map<ClientDto>(clientEntity);
+
+            return CreatedAtRoute("GetClient", new { clientId = clientToReturn.Id }, clientToReturn);
         }
     }
 }

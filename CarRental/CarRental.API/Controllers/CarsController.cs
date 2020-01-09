@@ -1,4 +1,6 @@
-﻿using CarRental.API.Entities;
+﻿using AutoMapper;
+using CarRental.API.Entities;
+using CarRental.API.Models;
 using CarRental.API.ResourceParameters;
 using CarRental.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +14,12 @@ namespace CarRental.API.Controllers
     public class CarsController : ControllerBase
     {
         private readonly ICarRentalRepository _carRentalRepository;
+        private readonly IMapper _mapper;
 
-        public CarsController(ICarRentalRepository carRentalRepository)
+        public CarsController(ICarRentalRepository carRentalRepository, IMapper mapper)
         {
             _carRentalRepository = carRentalRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +30,7 @@ namespace CarRental.API.Controllers
             return Ok(carsFromRepo);
         }
 
-        [HttpGet("{carId}")]
+        [HttpGet("{carId}", Name = "GetCar")]
         public ActionResult<Car> GetRental(Guid carId)
         {
             var carFromRepo = _carRentalRepository.GetCar(carId);
@@ -37,6 +41,16 @@ namespace CarRental.API.Controllers
             }
 
             return (carFromRepo);
+        }
+
+        [HttpPost]
+        public ActionResult<Car> CreateCar(CarForCreationDto car)
+        {
+            var carEntity = _mapper.Map<Car>(car);
+            _carRentalRepository.AddCar(carEntity);
+            _carRentalRepository.Save();
+
+            return CreatedAtRoute("GetCar", new { carId = carEntity.Id }, carEntity);
         }
     }
 }

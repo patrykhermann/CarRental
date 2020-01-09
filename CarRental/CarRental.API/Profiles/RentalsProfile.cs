@@ -7,6 +7,7 @@ namespace CarRental.API.Profiles
         public RentalsProfile()
         {
             CreateMap<Entities.Rental, Models.RentalDto>();
+            CreateMap<Models.RentalForCreationDto, Entities.Rental>();
         }
     }
 }

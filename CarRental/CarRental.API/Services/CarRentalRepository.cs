@@ -1,5 +1,6 @@
 ﻿using CarRental.API.DbContexts;
 using CarRental.API.Entities;
+using CarRental.API.Helpers;
 using CarRental.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,10 @@ namespace CarRental.API.Services
             }
 
             rental.Id = Guid.NewGuid();
-
+            rental.Car.Id = Guid.NewGuid();
+            rental.Client.Id = Guid.NewGuid();
+            rental.FullPrice = RentalPriceCalculator.CalculateFullPrice(rental);
+            
             _context.Rentals.Add(rental);
         }
 
