@@ -14,7 +14,7 @@
 **Errors**
 * 400 - Bad Request
 * 402 - Request Failed
-* 404 - Not Foung
+* 404 - Not Found
 * 415 - Unsupported Media Type
 
 **Clients resources**
