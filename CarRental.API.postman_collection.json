@@ -352,6 +352,396 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST Client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Marek\",\n\t\"lastName\": \"Andrzejczak\",\n\t\"dateOfBirth\": \"1968-03-04T00:00:00\",\n\t\"phoneNumber\": \"829392832\",\n\t\"email\": \"marek@andrzejczak.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Car",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"brand\": \"Ford\",\n\t\"model\": \"Fiesta\",\n\t\"pricePerDay\": 89\n}"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/cars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Rental",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pickUpDate\": \"2020-02-01T10:20:00\",\n\t\"dropOffDate\": \"2020-02-11T10:20:00\",\n\t\"pickUpLocation\": \"Poznań, Dworzec Główny\",\n\t\"dropOffLocation\": \"Poznań, Dworzec Główny\",\n\t\"discount\": 15,\n\t\"car\": {\n\t\t\"brand\": \"Audi\",\n\t\t\"model\": \"A6\",\n\t\t\"pricePerDay\": 229\n\t},\n\t\"client\": {\n\t\t\"firstName\": \"Roman\",\n\t\t\"lastName\": \"Czosnek\",\n\t\t\"dateOfBirth\": \"1981-05-10T00:00:00\",\n\t\t\"phoneNumber\": \"654789321\",\n\t\t\"email\": \"czosnkowy@gmail.com\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/rentals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"rentals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Car",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"brand\": \"New brand\",\r\n        \"model\": \"New model\",\r\n        \"pricePerDay\": 200\r\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/cars/ae939b70-1834-4ece-8cda-182694c2b6e8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars",
+						"ae939b70-1834-4ece-8cda-182694c2b6e8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Client",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Marek\",\n\t\"lastName\": \"Andrzejczak\",\n\t\"dateOfBirth\": \"1968-03-04T00:00:00\",\n\t\"phoneNumber\": \"829392832\",\n\t\"email\": \"marek@andrzejczak.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/clients/63c8753b-31a6-4cda-be54-344285573086",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients",
+						"63c8753b-31a6-4cda-be54-344285573086"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Rental",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pickUpDate\": \"2020-02-01T10:20:00\",\n\t\"dropOffDate\": \"2020-02-11T10:20:00\",\n\t\"pickUpLocation\": \"Poznań, Dworzec Główny\",\n\t\"dropOffLocation\": \"Poznań, Dworzec Główny\",\n\t\"discount\": 5,\n\t\"car\": {\n\t\t\"brand\": \"Audi\",\n\t\t\"model\": \"A6\",\n\t\t\"pricePerDay\": 229\n\t},\n\t\"client\": {\n\t\t\"firstName\": \"Roman\",\n\t\t\"lastName\": \"Czosnek\",\n\t\t\"dateOfBirth\": \"1981-05-10T00:00:00\",\n\t\t\"phoneNumber\": \"654789321\",\n\t\t\"email\": \"czosnkowy@gmail.com\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/rentals/ca96e8a7-2b4d-43af-90d1-09b701473c4c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"rentals",
+						"ca96e8a7-2b4d-43af-90d1-09b701473c4c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Client",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/email\",\n\t\t\"value\": \"my-new-email@gmail.com\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/clients/63c8753b-31a6-4cda-be54-344285573086",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients",
+						"63c8753b-31a6-4cda-be54-344285573086"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Car",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/pricePerDay\",\n\t\t\"value\": \"150\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/cars/ae939b70-1834-4ece-8cda-182694c2b6e8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars",
+						"ae939b70-1834-4ece-8cda-182694c2b6e8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Rental",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/dropOffLocation\",\n\t\t\"value\": \"Gdańsk, Lotnisko im. Lecha Wałęsy\"\n\t}\t\n]"
+				},
+				"url": {
+					"raw": "http://localhost:51044/api/rentals/ca96e8a7-2b4d-43af-90d1-09b701473c4c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"rentals",
+						"ca96e8a7-2b4d-43af-90d1-09b701473c4c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Client",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/clients/63c8753b-31a6-4cda-be54-344285573086",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"clients",
+						"63c8753b-31a6-4cda-be54-344285573086"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Car",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/cars/55c1b270-2b89-481a-8efe-43e4c1d8a083",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"cars",
+						"55c1b270-2b89-481a-8efe-43e4c1d8a083"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Rental",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51044/api/rentals/ca96e8a7-2b4d-43af-90d1-09b701473c4c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"rentals",
+						"ca96e8a7-2b4d-43af-90d1-09b701473c4c"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
