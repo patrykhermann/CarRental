@@ -66,6 +66,28 @@ public ICollection<Rental> Rentals { get; set; }
  By: -  
  Example: -  
 
+* **Example Request Body for POST and PUT**
+```json
+{
+  "firstName": "Marek",
+  "lastName": "Andrzejczak",
+  "dateOfBirth": "1968-03-04T00:00:00",
+  "phoneNumber": "829392832",
+  "email": "marek@andrzejczak.com"
+}
+```
+
+* **Example Request Body for PATCH**
+```json
+[
+  {
+    "op": "replace",
+    "path": "/email",
+    "value": "my-new-email@gmail.com"
+  }
+]
+```
+
 **Cars resources**
 ----
 * **Model**
@@ -103,6 +125,26 @@ public decimal PricePerDay { get; set; }
  Allowed: Yes  
  By: Brand, PricePerDay  
  Example: `/api/cars?pricePerDay=109&brand=seat`  
+
+* **Example Request Body for POST and PUT**
+```json
+{
+  "brand": "Ford",
+  "model": "Fiesta",
+  "pricePerDay": 89
+}
+```
+
+* **Example Request Body for PATCH**
+```json
+[
+  {
+    "op": "replace",
+    "path": "/pricePerDay",
+    "value": "150"
+  }
+]
+```
 
 **Rentals resources**
 ----
@@ -153,11 +195,45 @@ public Guid ClientId { get; set; }
 
 * **Searching**  
   Allowed: No <br />
-  Example: -
+  Example: -  
  * **Filtering**  
  Allowed: No <br />
  By: - <br />
  Example: -  <br />
+
+* **Example Request Body for POST and PUT**
+```json
+{
+  "pickUpDate": "2020-02-01T10:20:00",
+  "dropOffDate": "2020-02-11T10:20:00",
+  "pickUpLocation": "Poznań, Dworzec Główny",
+  "dropOffLocation": "Poznań, Dworzec Główny",
+  "discount": 15,
+  "car": {
+    "brand": "Audi",
+    "model": "A6",
+    "pricePerDay": 229
+  },
+  "client": {
+    "firstName": "Roman",
+    "lastName": "Czosnek",
+    "dateOfBirth": "1981-05-10T00:00:00",
+    "phoneNumber": "654789321",
+    "email": "czosnkowy@gmail.com"
+  }
+}
+```
+
+* **Example Request Body for PATCH**
+```json
+[
+  {
+    "op": "replace",
+    "path": "/dropOffLocation",
+    "value": "Gdańsk, Lotnisko im. Lecha Wałęsy"
+  }	
+]
+```
 
 **Additional information**
 ---
