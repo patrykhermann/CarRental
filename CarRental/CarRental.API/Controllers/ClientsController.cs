@@ -100,5 +100,21 @@ namespace CarRental.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{clientId}")]
+        public IActionResult DeleteClient(Guid clientId)
+        {
+            var clientFromRepo = _carRentalRepository.GetClient(clientId);
+
+            if (clientFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _carRentalRepository.DeleteClient(clientFromRepo);
+            _carRentalRepository.Save();
+
+            return NoContent();
+        }
     }
 }

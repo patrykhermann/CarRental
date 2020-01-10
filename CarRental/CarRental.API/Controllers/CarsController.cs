@@ -98,5 +98,21 @@ namespace CarRental.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{carId}")]
+        public IActionResult DeleteCar(Guid carId)
+        {
+            var carFromRepo = _carRentalRepository.GetCar(carId);
+
+            if(carFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _carRentalRepository.DeleteCar(carFromRepo);
+            _carRentalRepository.Save();
+
+            return NoContent();
+        }
     }
 }
