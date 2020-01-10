@@ -159,6 +159,6 @@ public Guid ClientId { get; set; }
  By: - <br />
  Example: -  <br />
 
-**Additional informations**
+**Additional information**
 ---
 In main repository folder you can find file `CarRental.API.postman_collection.json` which contains every allowed request to an API. You can import that file to the Postman and test an API from there.
