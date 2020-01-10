@@ -10,5 +10,7 @@ namespace CarRental.API.Models
         public string PickUpLocation { get; set; }
         public string DropOffLocation { get; set; }
         public decimal FullPrice { get; set; }
+        public string Car { get; set; }
+        public string Client { get; set; }
     }
 }

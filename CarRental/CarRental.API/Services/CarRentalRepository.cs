@@ -2,6 +2,7 @@
 using CarRental.API.Entities;
 using CarRental.API.Helpers;
 using CarRental.API.ResourceParameters;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +55,17 @@ namespace CarRental.API.Services
             }
 
             rental.Id = Guid.NewGuid();
-            rental.Car.Id = Guid.NewGuid();
-            rental.Client.Id = Guid.NewGuid();
-            rental.FullPrice = RentalPriceCalculator.CalculateFullPrice(rental);
+            
+            if(rental.Client != null)
+            {
+                rental.Client.Id = Guid.NewGuid();
+            }
+
+            if(rental.Car != null)
+            {
+                rental.Car.Id = Guid.NewGuid();
+                rental.FullPrice = RentalPriceCalculator.CalculateFullPrice(rental);
+            }
             
             _context.Rentals.Add(rental);
         }
@@ -145,7 +154,9 @@ namespace CarRental.API.Services
                 collection = collection.Where(c => c.Brand.Contains(searchQuery) || c.Model.Contains(searchQuery));
             }
 
-            return collection.ToList();
+            return collection
+                .OrderBy(c => c.PricePerDay)
+                .ToList();
         }
 
         public Client GetClient(Guid clientId)
@@ -168,7 +179,10 @@ namespace CarRental.API.Services
                 collection = collection.Where(c => c.FirstName.Contains(searchQuery) || c.LastName.Contains(searchQuery));
             }
 
-            return collection.ToList();
+            return collection
+                .OrderBy(c => c.LastName)
+                .OrderBy(c => c.FirstName)
+                .ToList();
         }
 
         public Rental GetRental(Guid rentalId)
@@ -178,12 +192,19 @@ namespace CarRental.API.Services
                 throw new ArgumentNullException(nameof(rentalId));
             }
 
-            return _context.Rentals.FirstOrDefault(r => r.Id == rentalId);
+            return _context.Rentals
+                .Include(r => r.Car)
+                .Include(r => r.Client)
+                .FirstOrDefault(r => r.Id == rentalId);
         }
 
         public IEnumerable<Rental> GetRentals()
         {
-            return _context.Rentals.ToList();
+            return _context.Rentals
+                .Include(r => r.Car)
+                .Include(r => r.Client)
+                .OrderBy(r => r.PickUpDate)
+                .ToList();
         }
 
         public bool RentalExists(Guid rentalId)
@@ -213,7 +234,8 @@ namespace CarRental.API.Services
 
         public void UpdateRental(Rental rental)
         {
-            // No code in this implementation 
+            rental.FullPrice = RentalPriceCalculator.CalculateFullPrice(rental);
+            _context.Rentals.Update(rental);
         }
     }
 }

@@ -7,13 +7,13 @@ namespace CarRental.API.ValidationAttributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var rental = (RentalForCreationDto)validationContext.ObjectInstance;
+            var rental = (RentalForManipulationDto)validationContext.ObjectInstance;
 
             if(rental.DropOffDate <= rental.PickUpDate)
             {
                 return new ValidationResult(
                     ErrorMessage,
-                    new[] { "RentalForCreationDto" });
+                    new[] { "RentalForManipulationDto" });
             }
 
             return ValidationResult.Success;

@@ -8,7 +8,12 @@ namespace CarRental.API.Helpers
         {
             var pickUpDate = rental.PickUpDate;
             var dropOffDate = rental.DropOffDate;
-            var pricePerDay = rental.Car.PricePerDay;
+            decimal pricePerDay = 0;
+            
+            if (rental.Car != null)
+            {
+                pricePerDay = rental.Car.PricePerDay;
+            }
 
             var daysDifference = (dropOffDate - pickUpDate).Days;
 

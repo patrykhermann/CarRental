@@ -16,6 +16,9 @@ namespace CarRental.API.Profiles
                 opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
 
             CreateMap<Models.ClientForCreationDto, Entities.Client>();
+            CreateMap<Entities.Client, Models.ClientForCreationDto>();
+            CreateMap<Models.ClientForUpdateDto, Entities.Client>();
+            CreateMap<Entities.Client, Models.ClientForUpdateDto>();
         }
     }
 }

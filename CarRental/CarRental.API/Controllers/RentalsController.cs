@@ -2,6 +2,7 @@
 using CarRental.API.Entities;
 using CarRental.API.Models;
 using CarRental.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace CarRental.API.Controllers
         {
             var rentalFromRepo = _carRentalRepository.GetRental(rentalId);
 
-            if(rentalFromRepo == null)
+            if (rentalFromRepo == null)
             {
                 return NotFound();
             }
@@ -52,6 +53,53 @@ namespace CarRental.API.Controllers
             var rentalToReturn = _mapper.Map<RentalDto>(rentalEntity);
 
             return CreatedAtRoute("GetRental", new { rentalId = rentalToReturn.Id }, rentalToReturn);
+        }
+
+        [HttpPut("{rentalId}")]
+        public IActionResult UpdateRental(Guid rentalId, RentalForUpdateDto rental)
+        {
+            var rentalFromRepo = _carRentalRepository.GetRental(rentalId);
+
+            if (rentalFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(rental, rentalFromRepo);
+
+            _carRentalRepository.UpdateRental(rentalFromRepo);
+            _carRentalRepository.Save();
+
+            return NoContent();
+        }
+
+        // TO CONSIDER
+
+        [HttpPatch("{rentalId}")]
+        public IActionResult UpdateRental(Guid rentalId, JsonPatchDocument<RentalForUpdateDto> patchDocument)
+        {
+            var rentalFromRepo = _carRentalRepository.GetRental(rentalId);
+
+            if (rentalFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var rentalToPatch = _mapper.Map<RentalForUpdateDto>(rentalFromRepo);
+
+            patchDocument.ApplyTo(rentalToPatch, ModelState);
+
+            if (!TryValidateModel(rentalToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(rentalToPatch, rentalFromRepo);
+
+            _carRentalRepository.UpdateRental(rentalFromRepo);
+            _carRentalRepository.Save();
+            
+            return NoContent();
         }
     }
 }

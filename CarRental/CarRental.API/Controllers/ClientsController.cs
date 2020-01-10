@@ -3,6 +3,7 @@ using CarRental.API.Entities;
 using CarRental.API.Models;
 using CarRental.API.ResourceParameters;
 using CarRental.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,51 @@ namespace CarRental.API.Controllers
             var clientToReturn = _mapper.Map<ClientDto>(clientEntity);
 
             return CreatedAtRoute("GetClient", new { clientId = clientToReturn.Id }, clientToReturn);
+        }
+
+        [HttpPut("{clientId}")]
+        public IActionResult Updateclient(Guid clientId, ClientForUpdateDto client)
+        {
+            var clientFromRepo = _carRentalRepository.GetClient(clientId);
+
+            if (clientFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(client, clientFromRepo);
+
+            _carRentalRepository.UpdateClient(clientFromRepo);
+            _carRentalRepository.Save();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{clientId}")]
+        public IActionResult Updateclient(Guid clientId, JsonPatchDocument<ClientForUpdateDto> patchDocument)
+        {
+            var clientFromRepo = _carRentalRepository.GetClient(clientId);
+
+            if (clientFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var clientToPatch = _mapper.Map<ClientForUpdateDto>(clientFromRepo);
+
+            patchDocument.ApplyTo(clientToPatch, ModelState);
+
+            if (!TryValidateModel(clientToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(clientToPatch, clientFromRepo);
+
+            _carRentalRepository.UpdateClient(clientFromRepo);
+            _carRentalRepository.Save();
+
+            return NoContent();
         }
     }
 }
